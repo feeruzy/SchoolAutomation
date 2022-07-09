@@ -14,5 +14,5 @@ public class ModelDb : DbContext
   }
 
   // database table class here.
-  // public virtual DbSet<ClassName> TblClassNames { get; set; }
+  public virtual DbSet<ClassYear> tblYears { get; set; }
 }
