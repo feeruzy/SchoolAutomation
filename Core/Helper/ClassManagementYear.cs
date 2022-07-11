@@ -5,28 +5,32 @@ namespace School.Core;
 /// </summary>
 public class YearManager
 {
+
+    private readonly ModelDb _db = new ModelDb();
+
     /// <summary>
     /// لیست سال های تحصیلی ثبت شده در سیستم
     /// </summary>
     /// <returns></returns>
-    public List<ClassYear> ListYears() {
+    public List<ClassYear> ListYears()
+    {
 
-        return new ModelDb().tblYears.ToList();
+        return _db.tblYears.ToList();
     }
 
-    
+
     /// <summary>
     /// تعریف سال جدید
     /// </summary>
     /// <param name="name">نام سال تحصیلی </param>
     /// <returns>شماره ایدی سال جدید</returns>
-    public int CreateYear(string name) {
-        var _db = new ModelDb();
-        
-        if (_db.tblYears.Any(i => i.Name == name)) 
+    public int CreateYear(string name)
+    {
+        if (_db.tblYears.Any(i => i.Name == name))
             throw new Exception("نام سال تکراری است.");
 
-        var newYear = new ClassYear() {
+        var newYear = new ClassYear()
+        {
             Name = name,
             IsActive = false
         };
@@ -37,11 +41,10 @@ public class YearManager
     }
 
 
-    public void EditActivation(int id) {
-        var _db = new ModelDb(); 
-
-        if(!_db.tblYears.Any(i => i.Id == id))
-            throw new Exception ("سال تحصیلی مورد نظر یافت نشد.");
+    public void EditActivation(int id)
+    {
+        if (!_db.tblYears.Any(i => i.Id == id))
+            throw new Exception("سال تحصیلی مورد نظر یافت نشد.");
 
         var allYears = _db.tblYears;
         foreach (var y in allYears)
