@@ -8,9 +8,9 @@ namespace School.Core;
 /// </summary>
 
 [DataContract]
-public class ClassDicipline
+public class ClassDiscipline
 {
     [Key, DataMember] public int Id { get; set; }
-    [DataMember] public string Titr { get; set; }
-    [DataMember] public int KasreNomre { get; set; }
+    [DataMember] public string Title { get; set; }
+    [DataMember] public float KasreNomre { get; set; }
 }

@@ -11,9 +11,10 @@ public class YearManager
   /// لیست سال های تحصیلی ثبت شده در سیستم
   /// </summary>
   /// <returns></returns>
-  public List<ClassYear> ListYears()
+  public IEnumerable<ClassYear> ListYears()
   {
-    return _db.tblYears.ToList();
+    foreach (var item in _db.tblYears)
+      yield return item;
   }
 
 
@@ -25,7 +26,7 @@ public class YearManager
   public int CreateYear(string name)
   {
     if (_db.tblYears.Any(i => i.Name == name))
-      throw new Exception("نام سال تکراری است.");
+      throw new ApplicationException("نام سال تکراری است.");
 
     var newYear = new ClassYear()
     {
@@ -45,10 +46,14 @@ public class YearManager
   public void EditActivation(int id)
   {
     if (!_db.tblYears.Any(i => i.Id == id))
-      throw new Exception("سال تحصیلی مورد نظر یافت نشد.");
+      throw new ApplicationException("سال تحصیلی مورد نظر یافت نشد.");
 
     foreach (var y in _db.tblYears) y.IsActive = y.Id == id;
     _db.SaveChanges();
+  }
+
+  public void removeYear(int id) {
+    // todo: check this.
   }
 
 }
