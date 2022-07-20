@@ -10,6 +10,10 @@ public class UserManagement
             yield return item;
     }
 
+    public ClassUser getUserInfo(int Id) {
+        return _db.tblUsers.FirstOrDefault(u => u.Id == Id);
+    }
+
     public int CreateUser(string fname, string lastName, string phone, UserTypeEnum userType)
     {
         ClassUser newItem = new ClassUser()

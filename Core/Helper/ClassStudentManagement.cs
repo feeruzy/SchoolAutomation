@@ -5,10 +5,22 @@ public class ClassStudentManagement
     private readonly ModelDb _db = new ModelDb();
 
 
-    public IEnumerable<ClassStudent> ListStudent()
+    public IEnumerable<FullUserData> ListStudent()
     {
         foreach (var item in _db.tblStudents)
-            yield return item;
+        {
+            var baseInfo = new UserManagement().getUserInfo(item.FK_StudentNumber);
+            var res = new FullUserData() {
+                Id = item.Id,
+                Address= item.Address,
+                Description =  item.Comment,
+                FName = baseInfo.Name,
+                Lname = baseInfo.Family,
+                Phone = baseInfo.Phone,
+                UserType = baseInfo.UserType
+            };
+            yield return res;
+        }
     }
 
 
