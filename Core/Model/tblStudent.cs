@@ -32,5 +32,6 @@ public class FullUserData
     public string FName { get; set; }
     public string Lname { get; set; }
     public string Phone { get; set; }
+    public string parentPhone {get; set;}
     public UserTypeEnum UserType { get; set; }
 }

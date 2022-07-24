@@ -7,7 +7,8 @@ public class ClassStudentManagement
 
     public IEnumerable<FullUserData> ListStudent()
     {
-        foreach (var item in _db.tblStudents)
+        var allStudentList = _db.tblStudents.ToList();
+        foreach (ClassStudent item in allStudentList)
         {
             var baseInfo = new UserManagement().getUserInfo(item.FK_StudentNumber);
             var res = new FullUserData() {
@@ -17,6 +18,7 @@ public class ClassStudentManagement
                 FName = baseInfo.Name,
                 Lname = baseInfo.Family,
                 Phone = baseInfo.Phone,
+                parentPhone = item.ParentNumber,
                 UserType = baseInfo.UserType
             };
             yield return res;
