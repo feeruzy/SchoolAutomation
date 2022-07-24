@@ -26,15 +26,55 @@ public class SchoolController : ControllerBase
     [HttpPut]
     public IActionResult CreateNewStudent(string fname, string lname, string address, string phone = "-", string parentPhone = "-", string description = "-")
     {
-        var result = new ClassStudentManagement().createStudent(fname, lname, phone, address, parentPhone, description);
-        return Ok($"user created with  id {result}");
+        try
+        {
+            var result = new ClassStudentManagement().createStudent(fname, lname, phone, address, parentPhone, description);
+            return Ok($"user created with  id {result}");
+        }
+        catch (ApplicationException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (Exception e)
+        {
+            return BadRequest("خطا در انجام عملیات.");
+        }
     }
-    [HttpPost] public IActionResult EditStudentInfo() => Ok();
+    [HttpPost]
+    public IActionResult EditStudentInfo(int sId, string fname, string lastName, string address, string phone = "-", string parentPhone = "-", string description = "-")
+    {
+        try
+        {
+            new ClassStudentManagement().editStudent(sId, fname, lastName, phone, address, parentPhone, description);
+            return Ok($"User {lastName} Edited ");
+        }
+        catch (ApplicationException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (Exception e)
+        {
+            return BadRequest("خطا در انجام عملیات.");
+        }
+
+    }
     [HttpDelete]
     public IActionResult RemoveStudent(int userId)
     {
-        new ClassStudentManagement().removeStudent(userId);
-        return Ok($"student with id {userId} removed.");
+        try
+        {
+            new ClassStudentManagement().removeStudent(userId);
+            return Ok($"student with id {userId} removed.");
+        }
+
+        catch (ApplicationException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (Exception e)
+        {
+            return BadRequest("خطا در انجام عملیات.");
+        }
     }
     #endregion
 
