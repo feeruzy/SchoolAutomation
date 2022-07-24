@@ -79,10 +79,71 @@ public class SchoolController : ControllerBase
     #endregion
 
     #region year
-    [HttpGet] public IActionResult YearList() => Ok();
-    [HttpPut] public IActionResult AddYear() => Ok();
-    [HttpPost] public IActionResult ChangeActiveYear() => Ok();
-    [HttpDelete] public IActionResult RemoveYear() => Ok();
+    [HttpGet] public IActionResult YearList() 
+    {
+      try
+        {
+            var yearList = new YearManager().ListYears();
+            return Ok(yearList);
+        }
+
+        catch (ApplicationException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (Exception e)
+        {
+            return BadRequest("خطا در انجام عملیات.");
+        }
+    }
+    [HttpPut] public IActionResult AddYear(string name) {
+       try
+        {
+          var newYearId = new YearManager().CreateYear(name);
+            return Ok($"سال جدید با کد {newYearId} ثیت شد.");
+        }
+
+        catch (ApplicationException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (Exception e)
+        {
+            return BadRequest("خطا در انجام عملیات.");
+        }
+    }
+    [HttpPost] public IActionResult ChangeActiveYear(int id) {
+       try
+        {
+            new YearManager().EditActivation(id);
+            return Ok("سال تحصیلی قعال در سیستم تغییر کرد");
+        }
+
+        catch (ApplicationException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (Exception e)
+        {
+            return BadRequest("خطا در انجام عملیات.");
+        }
+    }
+    [HttpDelete] public IActionResult RemoveYear(int id) {
+       try
+        {
+            new YearManager().removeYear(id);
+            return Ok("سال تحصیلی موردنظر با موفقیت حذف شد.");
+        }
+
+        catch (ApplicationException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (Exception e)
+        {
+            return BadRequest("خطا در انجام عملیات.");
+        }
+    }
     #endregion
 
     #region discipline
