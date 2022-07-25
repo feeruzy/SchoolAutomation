@@ -21,4 +21,7 @@ public class ClassDiciplineStudent
 
     /// سال تحصیلی
     [DataMember] public int Fk_YearId { get; set; } // manaul foreign key
+
+    /// شماره دانش آموز
+    [DataMember] public int Fk_StudentId { get; set; } // manaul foreign key
 }
