@@ -10,16 +10,10 @@ public class DisciplineManagement
             yield return item;
     }
 
-    public int CreateDisciplineItem(string title, float score)
+    public int CreateDisciplineItem(ClassDiscipline newItem)
     {
-        if (_db.tblDisciplines.Any(d => d.Title == title))
+        if (_db.tblDisciplines.Any(d => d.Title == newItem.Title))
             throw new ApplicationException("عنوان تکراری است");
-
-        ClassDiscipline newItem = new ClassDiscipline()
-        {
-            KasreNomre = score,
-            Title = title
-        };
 
         _db.tblDisciplines.Add(newItem);
         _db.SaveChanges();
