@@ -37,7 +37,7 @@ public class SchoolController : ControllerBase
         }
         catch (Exception e)
         {
-          _logger.LogError($"{e.Message} {e.InnerException?.Message}");
+            _logger.LogError($"{e.Message} {e.InnerException?.Message}");
             return BadRequest("خطا در انجام عملیات.");
         }
     }
@@ -55,7 +55,7 @@ public class SchoolController : ControllerBase
         }
         catch (Exception e)
         {
-           _logger.LogError($"{e.Message} {e.InnerException?.Message}");
+            _logger.LogError($"{e.Message} {e.InnerException?.Message}");
             return BadRequest("خطا در انجام عملیات.");
         }
 
@@ -75,7 +75,7 @@ public class SchoolController : ControllerBase
         }
         catch (Exception e)
         {
-           _logger.LogError($"{e.Message} {e.InnerException?.Message}");
+            _logger.LogError($"{e.Message} {e.InnerException?.Message}");
             return BadRequest("خطا در انجام عملیات.");
         }
     }
@@ -97,7 +97,7 @@ public class SchoolController : ControllerBase
         }
         catch (Exception e)
         {
-           _logger.LogError($"{e.Message} {e.InnerException?.Message}");
+            _logger.LogError($"{e.Message} {e.InnerException?.Message}");
             return BadRequest("خطا در انجام عملیات.");
         }
     }
@@ -116,7 +116,7 @@ public class SchoolController : ControllerBase
         }
         catch (Exception e)
         {
-           _logger.LogError($"{e.Message} {e.InnerException?.Message}");
+            _logger.LogError($"{e.Message} {e.InnerException?.Message}");
             return BadRequest("خطا در انجام عملیات.");
         }
     }
@@ -135,7 +135,7 @@ public class SchoolController : ControllerBase
         }
         catch (Exception e)
         {
-           _logger.LogError($"{e.Message} {e.InnerException?.Message}");
+            _logger.LogError($"{e.Message} {e.InnerException?.Message}");
             return BadRequest("خطا در انجام عملیات.");
         }
     }
@@ -154,7 +154,7 @@ public class SchoolController : ControllerBase
         }
         catch (Exception e)
         {
-           _logger.LogError($"{e.Message} {e.InnerException?.Message}");
+            _logger.LogError($"{e.Message} {e.InnerException?.Message}");
             return BadRequest("خطا در انجام عملیات.");
         }
     }
@@ -176,7 +176,7 @@ public class SchoolController : ControllerBase
         }
         catch (Exception e)
         {
-           _logger.LogError($"{e.Message} {e.InnerException?.Message}");
+            _logger.LogError($"{e.Message} {e.InnerException?.Message}");
             return BadRequest("خطا در انجام عملیات.");
         }
 
@@ -222,7 +222,7 @@ public class SchoolController : ControllerBase
         }
         catch (Exception e)
         {
-           _logger.LogError($"{e.Message} {e.InnerException?.Message}");
+            _logger.LogError($"{e.Message} {e.InnerException?.Message}");
             return BadRequest("خطا در انجام عملیات.");
         }
 
@@ -241,7 +241,7 @@ public class SchoolController : ControllerBase
         }
         catch (Exception e)
         {
-           _logger.LogError($"{e.Message} {e.InnerException?.Message}");
+            _logger.LogError($"{e.Message} {e.InnerException?.Message}");
             return BadRequest("خطا در انجام عملیات.");
         }
 
@@ -249,9 +249,66 @@ public class SchoolController : ControllerBase
     #endregion
 
     #region disciplineStudent
-    [HttpGet] public IActionResult StudentDisciplineList(int studentId) => Ok();
-    [HttpPut] public IActionResult CreateStudentDiscipline() => Ok();
-    [HttpDelete] public IActionResult RemoveStudentDiscipline() => Ok();
+    [HttpGet]
+    public IActionResult StudentDisciplineList(int studentId)
+    {
+        try
+        {
+            var itemlist = new ClassDisciplineStudentManager().List(studentId);
+            return Ok(itemlist);
+        }
+        catch (ApplicationException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError($"{e.Message} {e.InnerException?.Message}");
+            return BadRequest("خطا در انجام عملیات.");
+        }
+
+    }
+    [HttpPut]
+    public IActionResult CreateStudentDiscipline(int studentId, DateTime dt, int disciplineId)
+    {
+
+        try
+        {
+            var addestudentdiscipline = new ClassDisciplineStudentManager().AddEventForStudent(studentId, dt, disciplineId);
+            return Ok("مورد انضباطی جدید ثبت شد.");
+        }
+        catch (ApplicationException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError($"{e.Message} {e.InnerException?.Message}");
+            return BadRequest("خطا در انجام عملیات.");
+        }
+
+    }
+
+
+
+    [HttpDelete]
+    public IActionResult RemoveStudentDiscipline(int itemId)
+    {
+        try
+        {
+            new ClassDisciplineStudentManager().remveEventItem(itemId);
+            return Ok("مورد انضباطی حذف شد.");
+        }
+        catch (ApplicationException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError($"{e.Message} {e.InnerException?.Message}");
+            return BadRequest("خطا در انجام عملیات.");
+        }
+    }
     #endregion
 
     #region Login
@@ -266,3 +323,4 @@ public class SchoolController : ControllerBase
     #endregion
 
 }
+

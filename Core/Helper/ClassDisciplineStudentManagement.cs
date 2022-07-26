@@ -6,60 +6,66 @@ namespace School.Core;
 public class ClassDisciplineStudentManager
 {
 
-  private readonly ModelDb _db = new ModelDb();
+    private readonly ModelDb _db = new ModelDb();
 
-  /// <summary>
-  /// لیست موارد انضباطی برای یک دانش آموز مشخص
-  /// </summary>
-  /// <param name="studentId">شماره دانش آموزی</param>
-  /// <returns>موارد انظباطی مرتبط با دانش آموز.</returns>
-  public IEnumerable<ClassDiciplineStudent> List(int studentId)
-  {
-    foreach (var item in _db.tblDisciplineStudents)
-      yield return item;
-  }
+    /// <summary>
+    /// لیست موارد انضباطی برای یک دانش آموز مشخص
+    /// </summary>
+    /// <param name="studentId">شماره دانش آموزی</param>
+    /// <returns>موارد انظباطی مرتبط با دانش آموز.</returns>
+    public IEnumerable<ClassDiciplineStudent> List(int studentId)
+    {
+        if (!_db.tblStudents.Any(i => i.Id == studentId))
+            throw new ApplicationException("شماره دانش آموز نامعتبر است.");
 
-  /// <summary>
-  /// ثبت مورد انضباطی برای دانش آموز
-  /// </summary>
-  /// <param name="studentId">شماره دانش آموزی</param>
-  /// <param name="dt">تاریخ رویداد</param>
-  /// <param name="disciplineId">کد مورد انضباطی</param>
-  /// <returns>آي دی مورد انظباطی ثبت شده برای دانش آموز.</returns>
-  public int AddEventForStudent(int studentId, DateTime dt, int disciplineId)
-  {
-    if (!_db.tblYears.Any(i => i.IsActive))
-      throw new ApplicationException("سال تحصیلی فعال در سیستم تعریف نشده است.");
+        var allEventForOneStudent = _db.tblDisciplineStudents.Where(i => i.Fk_StudentId == studentId).OrderByDescending(i=> i.Date);
+        foreach (var item in allEventForOneStudent)
+            yield return item;
+    }
 
-    if (!_db.tblStudents.Any(i => i.Id == studentId))
-      throw new ApplicationException("شماره دانش آموزی نامعتبر.");
+    /// <summary>
+    /// ثبت مورد انضباطی برای دانش آموز
+    /// </summary>
+    /// <param name="studentId">شماره دانش آموزی</param>
+    /// <param name="dt">تاریخ رویداد</param>
+    /// <param name="disciplineId">کد مورد انضباطی</param>
+    /// <returns>آي دی مورد انظباطی ثبت شده برای دانش آموز.</returns>
+    public int AddEventForStudent(int studentId, DateTime dt, int disciplineId)
+    {
+        if (!_db.tblYears.Any(i => i.IsActive))
+            throw new ApplicationException("سال تحصیلی فعال در سیستم تعریف نشده است.");
 
-    if (!_db.tblDisciplines.Any(i => i.Id == disciplineId))
-      throw new ApplicationException("مورد انضباطی نامشخص.");
+        if (!_db.tblStudents.Any(i => i.Id == studentId))
+            throw new ApplicationException("شماره دانش آموزی نامعتبر.");
 
-    var eventItem = new ClassDiciplineStudent() {
-      Fk_YearId = _db.tblYears.FirstOrDefault(i => i.IsActive).Id,
-      Date = dt,
-      Fk_DiciplineId = disciplineId,
-      Fk_StudentId = studentId
-    };
+        if (!_db.tblDisciplines.Any(i => i.Id == disciplineId))
+            throw new ApplicationException("مورد انضباطی نامشخص.");
 
-    _db.tblDisciplineStudents.Add(eventItem);
-    _db.SaveChanges();
+        var eventItem = new ClassDiciplineStudent()
+        {
+            Fk_YearId = _db.tblYears.FirstOrDefault(i => i.IsActive).Id,
+            Date = dt,
+            Fk_DiciplineId = disciplineId,
+            Fk_StudentId = studentId
+        };
 
-    return eventItem.Id;
-  }
+        _db.tblDisciplineStudents.Add(eventItem);
+        _db.SaveChanges();
 
-  /// <summary>
-  /// حذف مورد انضباطی ثبت شده
-  /// </summary>
-  /// <param name="itemId">id discipline student item</param>
-  public void remveEventItem(int itemId)
-  {
-    if  (_db.tblDisciplineStudents.Any(i=> i.Id == itemId))
-      throw new ApplicationException("شماره درخواست نامعتبر است.");
+        return eventItem.Id;
+    }
 
-    var item = _db.tblDisciplineStudents.FirstOrDefault(i=> i.Id == itemId);
-    _db.tblDisciplineStudents.Remove(item);
-  }
+    /// <summary>
+    /// حذف مورد انضباطی ثبت شده
+    /// </summary>
+    /// <param name="itemId">id discipline student item</param>
+    public void remveEventItem(int itemId)
+    {
+        if (!_db.tblDisciplineStudents.Any(i => i.Id == itemId))
+            throw new ApplicationException("شماره درخواست نامعتبر است.");
+
+        var item = _db.tblDisciplineStudents.FirstOrDefault(i => i.Id == itemId);
+        _db.tblDisciplineStudents.Remove(item);
+        _db.SaveChanges();
+    }
 }
