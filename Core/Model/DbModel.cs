@@ -19,4 +19,8 @@ public class ModelDb : DbContext
     public virtual DbSet<ClassDiscipline> tblDisciplines { get; set; }
     public virtual DbSet<ClassStudent> tblStudents { get; set; }
     public virtual DbSet<ClassDiciplineStudent> tblDisciplineStudents { get; set; }
+
+    public virtual DbSet<TblClass> tblClasses { get; set; }
+    public virtual DbSet<FieldClass> tblFields { get; set; }
+    public virtual DbSet<MajorClass> tblMajors { get; set; }
 }
