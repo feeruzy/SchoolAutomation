@@ -201,8 +201,9 @@ public class SchoolController : ControllerBase
         {
             return BadRequest(e.Message);
         }
-        catch (Exception e)
+        catch (Exception e) 
         {
+          _logger.LogError($"{e.Message} {e.InnerException?.Message}");
             return BadRequest("خطا در انجام عملیات.");
         }
     }
