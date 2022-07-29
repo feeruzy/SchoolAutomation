@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
 namespace School.Core;
@@ -13,10 +14,13 @@ public class ClassStudent
 {
     [Key, DataMember] public int Id { get; set; }
     /// شماره دانش آموزی
-    [DataMember] public int FK_StudentNumber { get; set; }
+    [DataMember] public int Fk_userId { get; set; }
     [DataMember] public string ParentNumber { get; set; }
     [DataMember] public string Address { get; set; }
     [DataMember] public string Comment { get; set; }
+
+    [ForeignKey(nameof(Fk_userId))] 
+    [DataMember] public virtual ClassUser User { get; set; }
 }
 
 

@@ -5,23 +5,23 @@ public class ClassStudentManagement
     private readonly ModelDb _db = new ModelDb();
 
 
-    public IEnumerable<FullUserData> ListStudent()
+    public IEnumerable<ClassStudent> ListStudent()
     {
         var allStudentList = _db.tblStudents.ToList();
         foreach (ClassStudent item in allStudentList)
         {
-            var baseInfo = new UserManagement().getUserInfo(item.FK_StudentNumber);
+            // var info = new UserManagement().getUserInfo(item.Id);
             var res = new FullUserData() {
                 Id = item.Id,
                 Address= item.Address,
                 Description =  item.Comment,
-                FName = baseInfo.Name,
-                Lname = baseInfo.Family,
-                Phone = baseInfo.Phone,
+                FName = item.User.Name,
+                Lname = item.User.Family,
+                Phone = item.User.Phone,
                 parentPhone = item.ParentNumber,
-                UserType = baseInfo.UserType
+                UserType = item.User.UserType
             };
-            yield return res;
+            yield return item;
         }
     }
 
@@ -30,15 +30,15 @@ public class ClassStudentManagement
     {
         int newUserId = new UserManagement().CreateUser(fname, lastName, phone, UserTypeEnum.Student);
 
-        if (_db.tblStudents.Any(u => u.FK_StudentNumber == newUserId))
+        if (_db.tblStudents.Any(u => u.Fk_userId == newUserId))
             throw new ApplicationException("اطلاعات کاربر قبلا در سیستم ثبت شده.");
 
         var newStudent = new ClassStudent()
         {
-            FK_StudentNumber = newUserId,
+            Fk_userId = newUserId,
             Address = address,
             ParentNumber = parentPhone,
-            Comment = description
+            Comment = description,
         };
         _db.tblStudents.Add(newStudent);
         _db.SaveChanges();

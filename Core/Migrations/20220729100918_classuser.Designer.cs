@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using School.Core;
 
@@ -11,9 +12,10 @@ using School.Core;
 namespace Core.Migrations
 {
     [DbContext(typeof(ModelDb))]
-    partial class ModelDbModelSnapshot : ModelSnapshot
+    [Migration("20220729100918_classuser")]
+    partial class classuser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -90,9 +92,12 @@ namespace Core.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("Fk_userId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("tblStudents");
                 });
@@ -206,7 +211,7 @@ namespace Core.Migrations
                 {
                     b.HasOne("School.Core.ClassUser", "User")
                         .WithMany()
-                        .HasForeignKey("Fk_userId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
