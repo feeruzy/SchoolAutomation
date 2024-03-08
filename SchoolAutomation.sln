@@ -1,19 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{DFC18698-6173-436C-BBC7-58364FE35264}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{DFC18698-6173-436C-BBC7-58364FE35264}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{5FD5DC9C-FD5C-4F03-A00D-352FDB4E76A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{5FD5DC9C-FD5C-4F03-A00D-352FDB4E76A9}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "webapp", "WebApp\webapp.esproj", "{15F87E0C-22CE-4EED-997A-D77B302E41DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DFC18698-6173-436C-BBC7-58364FE35264}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -24,5 +23,17 @@ Global
 		{5FD5DC9C-FD5C-4F03-A00D-352FDB4E76A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FD5DC9C-FD5C-4F03-A00D-352FDB4E76A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FD5DC9C-FD5C-4F03-A00D-352FDB4E76A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15F87E0C-22CE-4EED-997A-D77B302E41DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15F87E0C-22CE-4EED-997A-D77B302E41DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15F87E0C-22CE-4EED-997A-D77B302E41DB}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{15F87E0C-22CE-4EED-997A-D77B302E41DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15F87E0C-22CE-4EED-997A-D77B302E41DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15F87E0C-22CE-4EED-997A-D77B302E41DB}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C8F8BC4D-DDB9-4103-8B69-B659B8A88779}
 	EndGlobalSection
 EndGlobal

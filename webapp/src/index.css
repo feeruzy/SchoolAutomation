@@ -1,0 +1,87 @@
+@font-face {
+  font-family: "vazir";
+  src: local('Vazirmatn-FD-Regular'), url(./assets/fonts/Vazirmatn-FD-Regular.ttf) format('truetype');
+  font-weight: 400;
+}
+@font-face {
+  font-family: "vazir";
+  src: local('Vazirmatn-FD-Medium'), url(./assets/fonts/Vazirmatn-FD-Medium.ttf) format('truetype');
+  font-weight: 500;
+}
+@font-face {
+  font-family: "vazir";
+  src: local('Vazirmatn-FD-Bold'), url(./assets/fonts/Vazirmatn-FD-Bold.ttf) format('truetype');
+  font-weight: 700;
+}
+
+body {
+  font-family: vazir;
+}
+
+nav {
+  font-weight: 700;
+  background-color: #dbdbdb;
+  border-radius: 5px;
+}
+
+.body {
+  min-height: 80vh;
+  background-color: #f8f9fa;
+  font-size: 11pt;
+  margin-top: 1vh;
+}
+
+
+.sidebar {
+  padding-top: 2vh;
+  border-left: 1px dashed #b8b8b8;
+}
+.sidebar .accordion-header button {
+  background-color: #dbdbdb;
+  box-shadow: 0 0 2px gray;
+}
+.sidebar .accordion-header button:focus {
+  box-shadow: 0 0 2px black;
+}
+.sidebar .accordion-header button::after {
+  display: block;
+  position: absolute;
+  left: 5%;
+}
+.sidebar .accordion-body {
+  padding: 0;
+}
+.sidebar .list-group {
+  border: none;
+  border-radius: 0;
+}
+
+
+
+.main {
+  padding-top: 2vh;
+}
+.main .accordion-header button {
+  background-color: #dbdbdb;
+  box-shadow: 0 0 2px gray;
+}
+.main .accordion-header button:focus {
+  box-shadow: 0 0 2px black;
+  
+}
+.main .accordion-header button::after {
+  display: block;
+  position: absolute;
+  left: 2%;
+}
+
+
+
+.test {
+  border: 1px solid red;
+  background: #ff00aa3f;
+}
+
+
+
+@media (prefers-color-scheme: light) {}
