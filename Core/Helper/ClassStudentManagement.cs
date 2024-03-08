@@ -5,24 +5,24 @@ public class ClassStudentManagement
     private readonly ModelDb _db = new ModelDb();
 
 
-    public IEnumerable<ClassStudent> ListStudent()
+    public IEnumerable<FullUserData> ListStudent()
     {
-        var allStudentList = _db.tblStudents.ToList();
-        foreach (ClassStudent item in allStudentList)
+        var allStudentList = _db.tblStudents;
+        foreach (var item in allStudentList)
         {
-            // var info = new UserManagement().getUserInfo(item.Id);
-            var res = new FullUserData() {
-                Id = item.Id,
-                Address= item.Address,
-                Description =  item.Comment,
-                FName = item.User.Name,
-                Lname = item.User.Family,
-                Phone = item.User.Phone,
+            var userInfo = new UserManagement().getUserInfo(item.Id);
+            var info = new FullUserData()
+            {
+                Address = item.Address,
                 parentPhone = item.ParentNumber,
-                UserType = item.User.UserType
-
+                Description = item.Comment,
+                FName = userInfo.Name,
+                Lname = userInfo.Family,
+                Phone = userInfo.Phone,
+                UserType = (UserTypeEnum) userInfo.UserType,
+                Id = item.Id
             };
-            yield return item;
+            yield return info;
         }
     }
 
@@ -46,6 +46,8 @@ public class ClassStudentManagement
         return newStudent.Id;
     }
 
+
+    // todo: check if user id and student id for editing data.
     public void editStudent(int sId, string fname, string lastName, string phone, string address, string parentPhone, string description)
     {
         if (!_db.tblStudents.Any(x => x.Id == sId))
