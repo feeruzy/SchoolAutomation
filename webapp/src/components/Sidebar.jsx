@@ -20,6 +20,7 @@ function Sidebar() {
                 <ListGroup>
                     <ListGroup.Item action>ثبت نمره</ListGroup.Item>
                     <ListGroup.Item action>ثبت مورد انضباطی</ListGroup.Item>
+                    <ListGroup.Item action>ارسال پیام و دعوتنامه</ListGroup.Item>
                 </ListGroup>
             </Accordion.Body>
         </Accordion.Item>
