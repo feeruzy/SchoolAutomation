@@ -1,11 +1,11 @@
-import { Accordion } from "react-bootstrap";
-import Swr from "./Swr";
+import { Accordion } from "react-bootstrap"
+import Swr from '../components/Swr'
 
-function MainWindow({ title }) {
+function StudentPage() {
     return (
         <Accordion defaultActiveKey="0">
             <Accordion.Item eventKey='0'>
-                <Accordion.Header>{title}</Accordion.Header>
+                <Accordion.Header>کارتابل دانش آموزان</Accordion.Header>
                 <Accordion.Body>
                     <Swr req={{ type: 'StudentList' }} />
                 </Accordion.Body>
@@ -14,4 +14,4 @@ function MainWindow({ title }) {
     )
 }
 
-export default MainWindow;
+export default StudentPage

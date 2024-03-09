@@ -1,5 +1,5 @@
 import useSWR from 'swr'
-import StudentManager from './Student';
+import StudentManager from './Student'
 
 const api = 'https://localhost:7033/School/';
 
