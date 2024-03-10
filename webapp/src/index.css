@@ -60,7 +60,7 @@ nav {
 
 .main {
   padding-top: 2vh;
-  font-size: medium;
+  font-size: 11pt;
 }
 .main .accordion-header button {
   background-color: #dbdbdb;
@@ -76,6 +76,10 @@ nav {
   left: 2%;
 }
 
+.main table button {
+  font-size: 9pt;
+  padding: 1px 4px;
+}
 
 
 .test {

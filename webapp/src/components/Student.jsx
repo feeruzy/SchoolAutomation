@@ -20,7 +20,7 @@ function RowInfo(item) {
 }
 
 function StudentManager({ data }) {
-    return (<Table>
+    return (<Table size="sm" striped hover bordered variant="light" responsive>
         <thead>
             <tr>
                 <th>کد</th>
